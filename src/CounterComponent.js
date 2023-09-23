@@ -1,6 +1,7 @@
 import React, { useState, useRef,useEffect  } from 'react';
 import axios from 'axios';
 import './CounterComponent.css';
+import './Style.css';
 import defaultImage from './camera.svg';
 import image1 from './image2.jpeg';
 import image2 from './image1.jpg';
@@ -8,7 +9,7 @@ import image3 from './image3.jpeg';
 import { Modal } from '@mui/material';
 import  Results  from './Results';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+// import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const CounterComponent = () => {
     const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -95,21 +96,48 @@ const CounterComponent = () => {
     };
   
     return (
-      
-      <div>
-        <Carousel showThumbs={false} autoPlay infiniteLoop interval={1300}>
-      <div>
-        <img src={image1}  style={{ width: 1920, height: 600 }}/>
-        
-      </div>
-      <div>
-        <img src={image2} alt="Image 2" style={{ width: 1920, height: 600 }}/>
-        
-      </div>
-      <div>
-        <img src={image3} alt="Image 3" style={{ width: 1920, height: 600 }}/>
-      </div>
-    </Carousel>
+<body>
+
+    {/* <section class="pimg1">
+        <div class="ptext">
+            <span class="textBg">Cashierless Counter
+
+            </span>
+        </div>
+    </section>
+    <section class="section section-light">
+        <h2>Section One</h2>
+        <p>Everything we see around us constitutes nature, including the sun, the moon, trees, flowers, fruits, human beings, birds, animals, etc. In nature, everyone depends on one another to keep the ecosystem healthy. For survival, every creature is interrelated and reliant on one another. Humans, for example, rely on nature for their survival, and nature provides us with oxygen, food, water, shelter, medicines, and clothing, among other things. Many shades may be seen in nature, contributing to the planet’s beauty.   
+        </p>
+    </section>
+    <section class="pimg2">
+        <div class="ptext">
+            <span class="textBg"> Explore Nature </span>
+        </div>
+    </section>
+    <section class="section section-dark">
+        <h2>Section Two</h2>
+        <p>Nature is the ultimate source of our living. Both living and non-living things include nature, and everyone is interdependent, which helps maintain the ecosystem. Plants, animals, and humans all depend on nature for their survival. It supplies oxygen, sunlight, soil, water, and other necessary components. But deforestation has been the primary cause of global warming, destroying nature.   
+        </p>
+    </section>
+    <section class="pimg3">
+        <div class="ptext">
+            <span class="textBg"> LOOK, DEEP INTO NATURE </span>
+        </div>
+    </section>
+    <section class="section section-dark">
+        <h2>Section Three</h2>
+        <p>shop with uss its your user friendly interface</p>
+    </section>
+    <section class="pimg1">
+        <div class="ptext">
+            <span class="textBg">
+
+            </span>
+            
+        </div>
+      </section> */}
+
 
         <div className="container">
           <h1>Welcome To I-MART</h1>
@@ -139,8 +167,7 @@ const CounterComponent = () => {
        
        </Modal>
         </div>
-       
-      </div>
+</body>
     );
   };
   

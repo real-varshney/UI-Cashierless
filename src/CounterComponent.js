@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 // import Modal from '@mui/material/Modal';
-import {auth} from './firebaseConfig'
+import { auth } from "./firebaseConfig";
 import axios from "axios";
 import "./CounterComponent.css";
 import "./Style.css";
-import defaultImage from "./camera.svg";
+import defaultImage from "./camera-solid.svg";
 import image1 from "./image2.jpeg";
 import image2 from "./image1.jpg";
 import image3 from "./image3.jpeg";
@@ -34,7 +34,7 @@ const CounterComponent = () => {
 
   const getloggedIn = () => {
     setLoggedIn((prev) => !prev);
-  }
+  };
 
   useEffect(() => {
     // Set the default image source on component mount
@@ -112,122 +112,146 @@ const CounterComponent = () => {
     }
   };
 
-
-
-
   // modal //
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   const modal_style = {
-    position: 'absolute',
-    color: 'black',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    color: "black",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    border: '2px solid #000',
-    backgroundColor: 'white',
+    border: "2px solid #000",
+    backgroundColor: "white",
     boxShadow: 24,
     p: 4,
   };
-  ////////
-
 
   return (
     <>
-      {loggedIn == true ? (
+      {loggedIn == false ? (
         <>
-          <div className="container">
-            <div class="v_flex">
-              <h1>Welcome To I-MART</h1>
-              <button onClick={() => setBtn((prev) => !prev)}>New page</button>
-              <div>
-                <Button onClick={handleOpen}>Open modal</Button>
-
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={modal_style}>
-                   <Auth getloggedIn={getloggedIn}></Auth>
-                  </Box>
-                </Modal>
-
-
+          <div>
+            <p className="moving-text">
+              welcome to I mart!! you are logged in as Cashier
+            </p>
+            <section class="pimg2">
+              <div class="ptext">
+                <span class="textBg">
+                  Scroll down to Proceed towards billing
+                </span>
               </div>
-            </div>
-            <h2>Scroll Down</h2>
-            <h2>To Proceed Towards</h2>
-            <h2>Billing</h2>
-          </div>
-
-          <div className="center">
-            <div id="video-container">
-              <video
-                id="video"
-                width="640"
-                height="480"
+            </section>
+            <section class="section section-dark" id="sectionp1">
+              {/* <button class="icon-button">
+      <i class="fa fa-user fa-4x" id='user'></i>
+    </button> */}
+              <div
                 style={{
-                  height: "450px",
-                  width: "600px",
-                  borderRadius: "10%",
-                  boxShadow: "0 0 10px rgba(0.3, 0.3, 0.3, 0.7)",
-                  display: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
-                ref={videoRef}
-              ></video>
-              <img
-                id="processed-image"
-                src={processedImageSrc}
-                style={{
-                  height: "450px",
-                  width: "600px",
-                  borderRadius: "10%",
-                  boxShadow: "0 0 10px rgba(0.3, 0.3, 0.3, 0.7)",
-                }}
-                ref={processedImageRef}
-              ></img>
+              >
+                <div class="icon-button">
+                  <Button onClick={handleOpen}>ADMIN ACCESS</Button>
+                </div>
+              </div>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={modal_style}>
+                  <Auth getloggedIn={getloggedIn}></Auth>
+                </Box>
+              </Modal>
+
+              {/* <button class="icon-button" >
+        Admin Access
+    </button> */}
+              {/* <p id="p1"><br/>Only Admin can access this portal</p> */}
+            </section>
+            <section class="pimg3">
+              <div class="ptext">
+                <span class="textBg">CASHIERLESS COUNTER</span>
+              </div>
+            </section>
+            <section class="section section-dark">
+              <h2 class="textBg">WE Ensure Barcode Free scan</h2>
+              <p id="p2">Capture all Items in a one go</p>
+            </section>
+            <section class="pimg1">
+              <div class="ptext">
+                <span class="textBg"></span>
+              </div>
+            </section>
+            <div className="center">
+              <div id="video-container">
+                <video
+                  id="video"
+                  width="640"
+                  height="480"
+                  style={{
+                    height: "450px",
+                    width: "600px",
+                    borderRadius: "10%",
+                    boxShadow: "0 0 10px rgba(0.3, 0.3, 0.3, 0.7)",
+                    display: "none",
+                  }}
+                  ref={videoRef}
+                ></video>
+                <img
+                  id="processed-image"
+                  src={processedImageSrc}
+                  style={{
+                    height: "450px",
+                    width: "600px",
+                    borderRadius: "10%",
+                    boxShadow: "0 0 10px rgba(0.3, 0.3, 0.3, 0.7)",
+                  }}
+                  ref={processedImageRef}
+                ></img>
+              </div>
+              <canvas
+                id="canvas"
+                style={{ display: "none" }}
+                ref={canvasRef}
+              ></canvas>
             </div>
-            <canvas
-              id="canvas"
-              style={{ display: "none" }}
-              ref={canvasRef}
-            ></canvas>
-          </div>
-
-          <div className="center">
-            <button
-              id="capture-btn"
-              onClick={toggleCapture}
-              ref={captureBtnRef}
-            >
-              Capture Image
-            </button>
-          </div>
-
-          <div className="modaldiv">
-            <Modal
-              open={isModal}
-              className={`modal ${isModal ? "fade-in" : "fade-out"}`}
-              closeAfterTransition
-            >
-              <Results
-                path={processedImageSrc}
-                output={output}
-                closeModel={setModel}
-                processimage={setProcessedImageSrc}
-              />
-            </Modal>
+            <div className="center">
+              <button
+                id="capture-btn"
+                onClick={toggleCapture}
+                ref={captureBtnRef}
+              >
+                Capture Image
+              </button>
+            </div>
+            <div className="modaldiv">
+              <Modal
+                open={isModal}
+                className={`modal ${isModal ? "fade-in" : "fade-out"}`}
+                closeAfterTransition
+              >
+                <Results
+                  path={processedImageSrc}
+                  output={output}
+                  closeModel={setModel}
+                  processimage={setProcessedImageSrc}
+                />
+              </Modal>
+            </div>
           </div>
         </>
       ) : (
-        <DataAdder>x</DataAdder>
+        <DataAdder getloggedIn={getloggedIn}></DataAdder>
       )}
     </>
   );

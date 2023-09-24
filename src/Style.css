@@ -1,29 +1,97 @@
 html,
 body{
     height: 100%;
-    margin: 0;
+    margin-top:0px;
+    padding-top:0px;
     font-size: 16px;
     font-family: "Lato", sans-serif;
     font-weight: 400;
     line-height: 1.8em;
     color: #666;
+    overflow-x:hidden;
 }
-.pimg1 {
+
+.container{
+    position: relative;
+    display: inline-block;
+    overflow: hidden; /* Hide overflow to prevent scrollbars */
+    white-space: nowrap; 
+}
+.moving-text{
+    color: white;
+}
+.moving-text{
+    font-family:'Courier New', Courier, monospace;
+    font-size:xx-large;
+    color: #e4dcdc;
+    position:relative;
+    margin:0px;
+    animation: moveText 8s linear infinite; /* Change the animation duration (e.g., 10s for a slower animation) */
+  }
+  
+  @keyframes moveText {
+    0% {
+        left: 100%; /* Start position */
+    }
+    100% {
+        left: -100%; /* End position */
+    }
+  }
+
+#p1{
+    font-size: larger;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:white;
+    /* float:right; */
+}
+#p2{
+    font-size:xx-large;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:#e4dcdc;
+}
+#sectionp1{
+    padding:20px;
+    /* background-color: #666; */
+}
+.pimg1{
+    content:"";
     background-image: url(./images/image4.jpg);
-    min-height: 100%;    
+    opacity:0.2;
+    min-height: 100%;
 }
 .pimg2{
+    position: relative; 
     background-image: url(./images/image5.jpg);
     min-height: 400px;    
 } 
+
+.pimg2::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0.70);
+}
 .pimg3{
+    position:relative;
     background-image: url(./images/image6.jpg);
     min-height: 400px;    
+}
+.pimg3::before{
+    content:"";
+    position:absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0.65);
 }
 .pimg1,
 .pimg2,
 .pimg3{
-    position:relative;
+    position: relative;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -31,7 +99,7 @@ body{
 }
 .ptext{
     position: absolute;
-    top: 50%;
+    top:50%;
     width: 100%;
     text-align: center;
     color:black;
@@ -40,9 +108,12 @@ body{
     text-transform: uppercase;
 }
 .textBg{
-    background: #d2c2c2;;
-    color: #b85353;
-    padding:20px;
+    color: #e1d2d2;
+    padding:10px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight:bolder;
+    font-size:xx-large;
+
 }
 
 .section{
@@ -70,3 +141,34 @@ body{
     text-align: center;
   }
   
+.icon-button {
+    display: flex;
+    width: fit-content;
+    background-color: rgb(85, 105, 130);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:15px;
+    padding-right:15px;
+    border-radius:10px;
+    cursor: pointer;
+    font-size:20px;
+    transition: background-color 0.3s ease;
+  }
+  .icon-button i{
+    align-items:center;
+  }
+  
+  .icon-button:hover {
+    background-color: #9c9d9e;
+  }
+  
+
+  .icon-button Button {
+    color: white;
+  }
+
+  #user{
+    size: 50px;
+  }

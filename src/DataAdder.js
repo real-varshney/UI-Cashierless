@@ -1,19 +1,28 @@
 import { useState, useRef, useEffect } from "react";
+import { FaUserCheck } from "react-icons/fa";
+import './DataAdder.css';
+import { AiFillCamera,AiOutlineArrowLeft } from "react-icons/ai";
+import { BsFillPlayFill ,BsStopCircle, BsFillCameraReelsFill} from "react-icons/bs";
 
-const DataAdder = () => {
+const DataAdder = ({getloggedIn}) => {
+  const [seed, setSeed] = useState(1);
+  const reset = () => {
+       setSeed(Math.random());
+   }
   const [permission, setPermission] = useState(false);
-  const [stream, setStream] = useState(null);
   const mimeType = "video/webm";
-
+  const[available, secAvailable] = useState(false);
   const mediaRecorder = useRef(null);
   const liveVideoFeed = useRef(null);
   const [recordingStatus, setRecordingStatus] = useState("inactive");
   const [videoChunks, setVideoChunks] = useState([]);
   const [recordedVideo, setRecordedVideo] = useState(null);
-  const [ten, setTen] = useState(false);
+
+
 
   const getCameraPermission = async () => {
     setRecordedVideo(null);
+    setRecordingStatus('Active')
     navigator.mediaDevices
       .getUserMedia({ video: { facingMode: "environment" } })
       .then((stream) => {
@@ -47,7 +56,7 @@ const DataAdder = () => {
   };
 
   const stopRecording = async () => {
-    setRecordingStatus("inactive");
+    setRecordingStatus("Recorded");
     mediaRecorder.current.stop();
     mediaRecorder.current.onstop = () => {
       const videoBlob = new Blob(videoChunks, { type: mimeType });
@@ -77,31 +86,41 @@ const DataAdder = () => {
   }, [recordingStatus]);
 
 
+  const signOut =  ()=>{
+    return 0
+  }
 
 
   return (
-    <div>
-      <h2>Video Recorder</h2>
-      <div>status {recordingStatus}</div>
+    <div className="v_main">
+      <div className="v_head_main"> 
+      <h1 className="v_head_1">Video Recorder</h1>
+      <button className="btn_spc" onClick={()=> signOut()}> <AiOutlineArrowLeft size={22}/> Return </button>
+      </div>
+      {/* <div className="v_icon"><FaUserCheck size={32}/></div> */}
+      <div className="v_status"><BsFillCameraReelsFill size={16} color={"black"} className="v_icon"/> {recordingStatus}</div>
       <main>
-        <div className="video-controls">
+        <div className="v_video_controls">
           {!permission ? (
-            <button onClick={getCameraPermission} type="button">
-              Get Camera
+            <button onClick={getCameraPermission} type="button" className="v_btn">
+              Get Started <AiFillCamera size={22} color={"black"} className="v_icon"/>
             </button>
           ) : null}
-          {permission && recordingStatus === "inactive" ? (
-            <button onClick={startRecording} type="button">
-              Start Recording
+          {permission && recordingStatus === "Active" ? (
+            <button onClick={startRecording} type="button" className="v_btn">
+              Start Recording <BsFillPlayFill className="v_icon" size={22}/>
             </button>
           ) : null}
           {recordingStatus === "recording" ? (
-            <button onClick={stopRecording} type="button">
-              Stop Recording
+            <button onClick={stopRecording} type="button" className="v_btn">
+              Stop Recording <BsStopCircle className="v_icon" size={22}/>
             </button>
           ) : null}
         </div>
         {liveVideoFeed !== null ? (
+          <div className="v_video">
+
+          
           <video
             id="video"
             width="640"
@@ -115,11 +134,18 @@ const DataAdder = () => {
             ref={liveVideoFeed}
             // src={liveVideoFeed}
           ></video>
+          </div>
         ) : null}
         {recordedVideo !== null ? (
-          <video controls width="250">
+          <>
+          <video controls width="250" className="v_recorded">
             <source src={recordedVideo} type="video/webm" />
           </video>
+          <div className="v_submit">
+          <button className="v_btn">Submit</button>
+          <button className="v_btn"onClick={()=>getloggedIn()}>Retake</button>
+          </div>
+           </>
         ) : null}
       </main>
     </div>
